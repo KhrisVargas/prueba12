@@ -1,10 +1,22 @@
-trigger:
-  - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+parameters:
+  - name: tags
+    displayName: 'Scenarios to run'
+    type: string
+    default: '@Exito'
 
-steps:
-  - script: |
-      mvn -B clean install
-    displayName: 'Build and Test with Maven'
+#########
+# It is not allow Trigger or Pull Request execution.
+########
+trigger: none
+pr: none
+
+
+lockBehavior: sequential
+
+stages:
+  - stage:
+    jobs:
+      - template: ../templates/jobs/template-pipelines.yml
+        parameters:
+          tags: ${{ parameters.tags }}
