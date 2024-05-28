@@ -5,10 +5,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: JavaToolInstaller@0
-    inputs:
-      versionSpec: '11'
-      jdkArchitectureOption: 'x64'
+  - script: |
+      echo "Setting up Java 11"
+      sudo apt-get install -y openjdk-11-jdk
+      java -version
+    displayName: 'Install Java 11'
 
   - script: |
       mvn -B clean install
