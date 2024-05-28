@@ -1,0 +1,17 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UseJava@1
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+      jdkDestinationOption: 'AzureStorage'
+
+  - script: |
+      mvn -B clean install
+    displayName: 'Build and Test with Maven'
