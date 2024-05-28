@@ -6,11 +6,5 @@ pool:
 
 steps:
   - script: |
-      echo "Setting up Java 11"
-      sudo apt-get install -y openjdk-11-jdk
-      java -version
-    displayName: 'Install Java 11'
-
-  - script: |
       mvn -B clean install
     displayName: 'Build and Test with Maven'
